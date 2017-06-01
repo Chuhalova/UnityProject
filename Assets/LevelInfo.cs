@@ -7,7 +7,7 @@ public class LevelInfo : MonoBehaviour {
 
 
 	public static LevelInfo current;
-
+	 
 	void Awake()
 	{
 		current = this;

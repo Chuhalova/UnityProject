@@ -1,30 +1,60 @@
 ﻿using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroRabbit : MonoBehaviour {
 	public int MaxHealth = 2;
-
 	int health = 1;
-
 	public float speed = 1;
 	Rigidbody2D myBody = null;
-
 	bool isGrounded = false;
 	bool JumpActive = false;
 	float JumpTime = 0f;
 	public float MaxJumpTime = 2f;
 	public float JumpSpeed = 2f;
-
+//	public bool death = false;
 	Transform heroParent = null;
-
-
 	void Start () {
 		myBody = this.GetComponent<Rigidbody2D>();
 		LevelInfo.current.setStartPosition (transform.position);
 		this.heroParent = this.transform.parent;
+	
 	}
 
+	public void addHealth(int number)
+	{
+		this.health += number;
+		if(this.health > MaxHealth)
+		{
+			this.health = MaxHealth; 
+		}
+	}
+
+	public void removeHealth(int number)
+	{
+		this.health -= number;
+		if(this.health < 0)
+		{
+			this.health = 0;
+		}
+		this.onHealthChange();
+	}
+
+	void onHealthChange()
+	{
+		if(this.health == 1)
+		{
+			this.transform.localScale = Vector3.one;
+		} else if(this.health == 2)
+		{
+			this.transform.localScale = Vector3.one * 2;
+		} else if(this.health == 0)
+		{
+
+			LevelInfo.current.onRabbitDeath(this);
+		}
+	}
 	void FixedUpdate()
 	{
 		float value = Input.GetAxis("Horizontal"); 
@@ -54,7 +84,15 @@ public class HeroRabbit : MonoBehaviour {
 		{
 			animator.SetBool("run", false);
 		}
+	//	if (death)
+	//	{
+	//		animator.SetBool("death", true);
+	//	}
+	//	else
+	//	{
 
+	//		animator.SetBool("death", false);
+	//	}
 		Vector3 from = transform.position + Vector3.up * 0.3f;
 		Vector3 to = transform.position + Vector3.down * 0.1f;
 		int layer_id = 1 << LayerMask.NameToLayer("Ground");
@@ -124,42 +162,16 @@ public class HeroRabbit : MonoBehaviour {
 			obj.transform.position = pos;
 		}
 	}
-	public void addHealth(int number)
-	{
-		this.health += number;
-		if(this.health > MaxHealth)
-		{
-			this.health = MaxHealth; 
-		}
+
+	//public void makeBigger()
+	//{
+		
+		//this.transform.localScale += new Vector3 (0.5F, 0.5f, 0);
+
+	//}
+	public void makeBigger (){
+		this.transform.localScale += new Vector3 (0.5F, 0.5f, 0);
 	}
 
-	public void removeHealth(int number)
-	{
-		this.health -= number;
-		if(this.health < 0)
-		{
-			this.health = 0;
-		}
-		this.onHealthChange();
-	}
 
-	void onHealthChange()
-	{
-		if(this.health == 1)
-		{
-			this.transform.localScale = Vector3.one;
-		} else if(this.health == 2)
-		{
-			this.transform.localScale = Vector3.one * 2;
-		} else if(this.health == 0)
-		{
-			LevelInfo.current.onRabbitDeath(this);
-		}
-	}
-
-	public void makeBigger()
-	{
-		this.transform.localScale = Vector3.one * 2;
-	}
 }
-
