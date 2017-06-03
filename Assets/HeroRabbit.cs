@@ -15,6 +15,7 @@ public class HeroRabbit : MonoBehaviour {
 	public float JumpSpeed = 2f;
 //	public bool death = false;
 	Transform heroParent = null;
+	public static HeroRabbit lastRabbit = null;
 	void Start () {
 		myBody = this.GetComponent<Rigidbody2D>();
 		LevelInfo.current.setStartPosition (transform.position);
@@ -22,41 +23,10 @@ public class HeroRabbit : MonoBehaviour {
 	
 	}
 
-	public void addHealth(int number)
-	{
-		this.health += number;
-		if(this.health > MaxHealth)
-		{
-			this.health = MaxHealth; 
-		}
-	}
 
-	public void removeHealth(int number)
-	{
-		this.health -= number;
-		if(this.health < 0)
-		{
-			this.health = 0;
-		}
-		this.onHealthChange();
-	}
-
-	void onHealthChange()
-	{
-		if(this.health == 1)
-		{
-			this.transform.localScale = Vector3.one;
-		} else if(this.health == 2)
-		{
-			this.transform.localScale = Vector3.one * 2;
-		} else if(this.health == 0)
-		{
-
-			LevelInfo.current.onRabbitDeath(this);
-		}
-	}
 	void FixedUpdate()
 	{
+		
 		float value = Input.GetAxis("Horizontal"); 
 		if (Mathf.Abs(value) > 0)
 		{
@@ -74,7 +44,7 @@ public class HeroRabbit : MonoBehaviour {
 		{
 			sr.flipX = false;
 		}
-
+	
 		Animator animator = GetComponent<Animator>(); // run-idle
 		if (Mathf.Abs(value) > 0)
 		{
@@ -93,6 +63,7 @@ public class HeroRabbit : MonoBehaviour {
 
 	//		animator.SetBool("death", false);
 	//	}
+
 		Vector3 from = transform.position + Vector3.up * 0.3f;
 		Vector3 to = transform.position + Vector3.down * 0.1f;
 		int layer_id = 1 << LayerMask.NameToLayer("Ground");
@@ -153,6 +124,14 @@ public class HeroRabbit : MonoBehaviour {
 			SetNewParent(this.transform, this.heroParent);
 		}
 	}
+	void Awake(){
+		lastRabbit=this;
+	}
+
+
+	public int rab_health(){
+		return health;
+	}
 	static void SetNewParent(Transform obj, Transform new_parent)
 	{
 		if (obj.transform.parent != new_parent)
@@ -162,7 +141,42 @@ public class HeroRabbit : MonoBehaviour {
 			obj.transform.position = pos;
 		}
 	}
+	public void addHealth(int number)
+	{
+		this.health += number;
+		if(this.health > MaxHealth)
+		{
+			this.health = MaxHealth; 
+		}
+	}
 
+	public void removeHealth(int number)
+	{
+		this.health -= number;
+		if(this.health < 0)
+		{
+			this.health = 0;
+		}
+		this.onHealthChange();
+	}
+
+	void onHealthChange()
+	{
+		if(this.health == 1)
+		{
+			this.transform.localScale = Vector3.one;
+		} else if(this.health == 2)
+		{
+			this.transform.localScale = Vector3.one * 2;
+		} else if(this.health == 0)
+		{
+
+			LevelInfo.current.onRabbitDeath(this);
+		}
+	}
+	public void orcAttack(){
+		LevelInfo.current.onRabbitDeath (this);
+	}
 	//public void makeBigger()
 	//{
 		
