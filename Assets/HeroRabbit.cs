@@ -144,7 +144,7 @@ public class HeroRabbit : MonoBehaviour {
 	public void addHealth(int number)
 	{
 		this.health += number;
-		if(this.health > MaxHealth)
+	if(this.health > MaxHealth)
 		{
 			this.health = MaxHealth; 
 		}
@@ -153,7 +153,7 @@ public class HeroRabbit : MonoBehaviour {
 	public void removeHealth(int number)
 	{
 		this.health -= number;
-		if(this.health < 0)
+	if(this.health < 0)
 		{
 			this.health = 0;
 		}
@@ -165,17 +165,26 @@ public class HeroRabbit : MonoBehaviour {
 		if(this.health == 1)
 		{
 			this.transform.localScale = Vector3.one;
-		} else if(this.health == 2)
-		{
-			this.transform.localScale = Vector3.one * 2;
+	} else if(this.health == 2)
+	{
+		this.transform.localScale = Vector3.one * 2;
 		} else if(this.health == 0)
-		{
-
-			LevelInfo.current.onRabbitDeath(this);
+	{
+		Animator animator = GetComponent<Animator>(); // run-idle	
+		animator.SetBool("death", true);
+		StartCoroutine (goOnStart());
 		}
+}
+	IEnumerator goOnStart(){
+		yield return new WaitForSeconds (0.8f);	
+		LevelInfo.current.onRabbitDeath(this);
+		Animator animator = GetComponent<Animator>(); // run-idle	
+		animator.SetBool("death", false);
 	}
 	public void orcAttack(){
-		LevelInfo.current.onRabbitDeath (this);
+		removeHealth (1);
+
+		//LevelInfo.current.onRabbitDeath (this);
 	}
 	//public void makeBigger()
 	//{

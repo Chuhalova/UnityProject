@@ -11,7 +11,7 @@ public class o_o : MonoBehaviour {
 		attack,
 		dead,
 		attacked,
-		idle
+		//idle
 	}
 	//starting from point .. 
 	Mode mode = Mode.walkToA;
@@ -45,7 +45,7 @@ public class o_o : MonoBehaviour {
 		if(mode==Mode.walkToA || mode==Mode.walkToB){
 			animator.SetBool("walk",true);}
 		if(mode==Mode.attack){
-			animator.SetBool("idle",true);
+			//animator.SetBool("idle",true);
 			animator.SetBool("walk", false);
 		}
 		if(mode==Mode.attacked)animator.SetTrigger("attacked");

@@ -10,7 +10,7 @@ public class deathZone : MonoBehaviour{
 
 		if (rabbit != null)
 		{
-			LevelInfo.current.onRabbitDeath(rabbit);
+		LevelInfo.current.onRabbitDeath(rabbit);
 		}
 	}
 }
