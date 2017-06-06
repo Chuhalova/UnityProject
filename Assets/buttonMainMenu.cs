@@ -12,6 +12,6 @@ public class buttonMainMenu : MonoBehaviour
 //	}
 	public void _onClick()
 	{
-		SceneManager.LoadScene ("Level");
+		SceneManager.LoadScene ("ChooseLevel");
 	}
 }
