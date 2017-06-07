@@ -2,10 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class LevelInfo : MonoBehaviour {
 	public static LevelInfo current;
 	int coins=0;
+	int lifesNumber = 3;
 	void Awake()
 	{
 		current = this;
@@ -18,6 +19,7 @@ public class LevelInfo : MonoBehaviour {
 	}
 	public void onRabbitDeath(HeroRabbit rabbit)
 	{
+		decreaseLifeNumber ();
 		uiCoinsCounter.coinsCounter.removeCoins();
 		rabbit.transform.position = this.startingPosition;
 	}
@@ -40,7 +42,17 @@ public class LevelInfo : MonoBehaviour {
 	{
 		Debug.Log("Сoins collected" + number);
 	}
-
+	void decreaseLifeNumber() {
+		if (lifesNumber <= 0) {
+			//lifesNumber = 3; //оновлюемо життя
+			SceneManager.LoadScene("ChooseLevel");
+		} else {
+			lifesNumber--;
+		}
+	}
+	public int getLifes() {
+		return lifesNumber;
+	}
 	public void addAlmaz(int number)
 	{
 		Debug.Log("Сoins collected" + number);

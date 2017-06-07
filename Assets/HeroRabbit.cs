@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroRabbit : MonoBehaviour {
-	public int MaxHealth = 2;
+	public int MaxHealth = 3;
 	int health = 1;
 	public float speed = 1;
 	Rigidbody2D myBody = null;
@@ -144,12 +144,13 @@ public class HeroRabbit : MonoBehaviour {
 	public void addHealth(int number)
 	{
 		this.health += number;
-	if(this.health > MaxHealth)
-		{
-			this.health = MaxHealth; 
-		}
+		if(this.health > MaxHealth)
+			{
+				this.health = MaxHealth; 
+			}
+		onHealthChange ();
 	}
-
+		
 	public void removeHealth(int number)
 	{
 		this.health -= number;
@@ -162,14 +163,13 @@ public class HeroRabbit : MonoBehaviour {
 
 	void onHealthChange()
 	{
-		if(this.health == 1)
-		{
+		if(this.health == 1){
 			this.transform.localScale = Vector3.one;
-	} else if(this.health == 2)
-	{
+		}
+		else if(this.health == 2){
 		this.transform.localScale = Vector3.one * 2;
-		} else if(this.health == 0)
-	{
+		} 
+		else if(this.health == 0){
 		Animator animator = GetComponent<Animator>(); // run-idle	
 		animator.SetBool("death", true);
 		StartCoroutine (goOnStart());
