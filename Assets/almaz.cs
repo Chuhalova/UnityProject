@@ -1,8 +1,10 @@
 ﻿public class almaz : Collectable
 {
+	string spriteName;
 	protected override void OnRabitHit(HeroRabbit rabit)
 	{
-		LevelInfo.current.addAlmaz(1);
+		crystalPanel.crystals.Crystals(spriteName);
+		//LevelInfo.current.addAlmaz(1);
 		this.CollectedHide();
 	}
 }

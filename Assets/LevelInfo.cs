@@ -7,6 +7,8 @@ public class LevelInfo : MonoBehaviour {
 	public static LevelInfo current;
 	int coins=0;
 	int lifesNumber = 3;
+	int fruits = 0;
+	int CrystalColor = -1;
 	void Awake()
 	{
 		current = this;
@@ -21,6 +23,7 @@ public class LevelInfo : MonoBehaviour {
 	{
 		decreaseLifeNumber ();
 		uiCoinsCounter.coinsCounter.removeCoins();
+		uiFruitsCounter.fruitsCounter.removeFruits ();
 		rabbit.transform.position = this.startingPosition;
 	}
 	public void addCoins(int number)
@@ -40,7 +43,9 @@ public class LevelInfo : MonoBehaviour {
 	}
 	public void addFruits(int number)
 	{
-		Debug.Log("Сoins collected" + number);
+		fruits += number;
+		uiFruitsCounter.fruitsCounter.setFruits(fruits);
+
 	}
 	void decreaseLifeNumber() {
 		if (lifesNumber <= 0) {
@@ -57,5 +62,13 @@ public class LevelInfo : MonoBehaviour {
 	{
 		Debug.Log("Сoins collected" + number);
 	}
+	public void setCrystalColor(int color) {
+		CrystalColor = color;
+	}
 
+	public int getCurCrystalColor() {
+		return CrystalColor;
+	}
 }
+
+
