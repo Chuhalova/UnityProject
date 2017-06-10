@@ -69,6 +69,5 @@ public class LevelInfo : MonoBehaviour {
 	public int getCurCrystalColor() {
 		return CrystalColor;
 	}
+
 }
-
-

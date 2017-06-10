@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroRabbit : MonoBehaviour {
+	
 	public int MaxHealth = 3;
 	int health = 1;
 	public float speed = 1;
@@ -20,7 +21,6 @@ public class HeroRabbit : MonoBehaviour {
 		myBody = this.GetComponent<Rigidbody2D>();
 		LevelInfo.current.setStartPosition (transform.position);
 		this.heroParent = this.transform.parent;
-	
 	}
 
 

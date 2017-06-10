@@ -3,7 +3,7 @@
 	string spriteName;
 	protected override void OnRabitHit(HeroRabbit rabit)
 	{
-		crystalPanel.crystals.Crystals(spriteName);
+		crystalPanel.crystals.Crystals(this.name);
 		//LevelInfo.current.addAlmaz(1);
 		this.CollectedHide();
 	}
