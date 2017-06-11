@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class g_o : MonoBehaviour {
+	//music
+	public AudioClip attackAudioClip = null;
+	AudioSource attackAudioSource = null;
+
 	public enum Mode {
 		walkToA,
 		walkToB,
@@ -29,6 +33,9 @@ public class g_o : MonoBehaviour {
 		startPoint = Mathf.Min(pointA.x, pointB.x);
 		//finish point -> point with bigger coordinates 
 		finishPoint = Mathf.Max(pointA.x, pointB.x);
+		//music
+		this.attackAudioSource = gameObject.AddComponent<AudioSource>();
+		this.attackAudioSource.clip = attackAudioClip;
 	}
 	//--------------------------
 	void Update () {
@@ -104,6 +111,8 @@ public class g_o : MonoBehaviour {
 				mode = Mode.attacked;
 				StartCoroutine(dieLater());
 			} else {
+				if(soundManager.Instance.isSoundOn())
+					attackAudioSource.Play();
 				mode = Mode.attack;
 			}
 		}

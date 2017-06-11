@@ -14,13 +14,33 @@ public class HeroRabbit : MonoBehaviour {
 	float JumpTime = 0f;
 	public float MaxJumpTime = 2f;
 	public float JumpSpeed = 2f;
-//	public bool death = false;
+
+	//music
+	public AudioClip deathAudioClip = null;
+	public AudioClip goAudioClip = null;
+	public AudioClip jumpAudioClip = null;
+	AudioSource deathAudioSource = null;
+	AudioSource goAudioSource = null;
+	AudioSource jumpAudioSource = null;
+
+	//	public bool death = false;
 	Transform heroParent = null;
 	public static HeroRabbit lastRabbit = null;
+
 	void Start () {
 		myBody = this.GetComponent<Rigidbody2D>();
 		LevelInfo.current.setStartPosition (transform.position);
 		this.heroParent = this.transform.parent;
+
+		//music
+
+		this.deathAudioSource = gameObject.AddComponent<AudioSource>();
+		this.deathAudioSource.clip = deathAudioClip;
+		this.goAudioSource = gameObject.AddComponent<AudioSource>();
+		this.goAudioSource.spatialBlend = 1;
+		this.goAudioSource.clip = goAudioClip;
+		this.jumpAudioSource= gameObject.AddComponent<AudioSource>();
+		this.jumpAudioSource.clip = jumpAudioClip;
 	}
 
 
@@ -48,11 +68,23 @@ public class HeroRabbit : MonoBehaviour {
 		Animator animator = GetComponent<Animator>(); // run-idle
 		if (Mathf.Abs(value) > 0)
 		{
+			if (soundManager.Instance.isSoundOn() && !goAudioSource.isPlaying && isGrounded)
+			{
+				goAudioSource.Play();
+			}
+			else if (!isGrounded)
+			{
+				goAudioSource.Stop();
+			}
 			animator.SetBool("run", true);
 		}
 		else
 		{
 			animator.SetBool("run", false);
+			if (soundManager.Instance.isSoundOn())
+			{
+				goAudioSource.Stop();
+			}
 		}
 	//	if (death)
 	//	{
@@ -70,10 +102,13 @@ public class HeroRabbit : MonoBehaviour {
 		RaycastHit2D hit = Physics2D.Linecast(from, to, layer_id);
 		if (hit)
 		{
+			if(!isGrounded && (soundManager.Instance.isSoundOn())) jumpAudioSource.Play();
 			isGrounded = true;
 		}
 		else
 		{
+			if (isGrounded && soundManager.Instance.isSoundOn()) 
+				jumpAudioSource.Play();
 			isGrounded = false;
 		}
 
@@ -83,7 +118,6 @@ public class HeroRabbit : MonoBehaviour {
 		}
 		if (this.JumpActive)
 		{
-
 			if (Input.GetButton("Jump"))
 			{
 				this.JumpTime += Time.deltaTime;
@@ -103,10 +137,12 @@ public class HeroRabbit : MonoBehaviour {
 
 		if (this.isGrounded)
 		{
+			//if (soundManager.Instance.isSoundOn ())jumpAudioSource.Stop ();
 			animator.SetBool("jump", false);
 		}
 		else
 		{
+			//if(soundManager.Instance.isSoundOn ())jumpAudioSource.Play ();
 			animator.SetBool("jump", true);
 		}
 
@@ -170,6 +206,10 @@ public class HeroRabbit : MonoBehaviour {
 		this.transform.localScale = Vector3.one * 2;
 		} 
 		else if(this.health == 0){
+			if (soundManager.Instance.isSoundOn())
+			{
+				deathAudioSource.Play();
+			}
 		Animator animator = GetComponent<Animator>(); // run-idle	
 		animator.SetBool("death", true);
 		StartCoroutine (goOnStart());

@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEditor;
 
 public class o_o : MonoBehaviour {
+	//music
+	public AudioClip attackAudioClip = null;
+	AudioSource attackAudioSource = null;
 
 	public enum Mode {
 		walkToA,
@@ -37,6 +40,10 @@ public class o_o : MonoBehaviour {
 		startPoint = Mathf.Min(pointA.x, pointB.x);
 		//learn max point 
 		finishPoint = Mathf.Max(pointA.x, pointB.x);
+
+		//music
+		this.attackAudioSource = gameObject.AddComponent<AudioSource>();
+		this.attackAudioSource.clip = attackAudioClip;
 	}
 		
 	void Update () {
@@ -63,6 +70,8 @@ public class o_o : MonoBehaviour {
 			myBody.velocity = vel;
 		}
 		if (mode == Mode.attack && (Time.time - last_carrot > 2.0f)) {
+			if(soundManager.Instance.isSoundOn())
+				attackAudioSource.Play();
 			Animator animator = GetComponent<Animator> ();
 			animator.SetBool ("attack", true);
 				if(sr.flipX)launchCarrot(1.0f);
