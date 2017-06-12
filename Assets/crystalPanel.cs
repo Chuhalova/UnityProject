@@ -8,6 +8,10 @@ public class crystalPanel : MonoBehaviour {
 	public Sprite second;
 	public Sprite third;
 
+	//for win panel
+	public bool firstWin=false;
+	public bool secondWin=false;
+	public bool thirdWin=false;
 
 	public static crystalPanel crystals;
 
@@ -28,9 +32,16 @@ public class crystalPanel : MonoBehaviour {
 	}
 
 	public void Crystals(string crystals) {
-		if (crystals == "gem-1") gemComponents[0].sprite2D = first;
-		else if (crystals == "gem-2") gemComponents[1].sprite2D = second;
-		else if (crystals == "gem-3") gemComponents[2].sprite2D = third;
+		if (crystals == "gem-1") {
+			gemComponents [0].sprite2D = first;
+			firstWin = true;
+		} else if (crystals == "gem-2") {
+			gemComponents [1].sprite2D = second;
+			secondWin = true;
+		} else if (crystals == "gem-3") {
+			gemComponents [2].sprite2D = third;
+			thirdWin = true;
+		}
 	}
 
 }

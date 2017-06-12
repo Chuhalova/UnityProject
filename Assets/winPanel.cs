@@ -14,6 +14,15 @@ public class winPanel : MonoBehaviour {
 	public AudioClip winAudioClip = null;
 	AudioSource winAudioSource = null;
 
+	//for crystals
+	public UI2DSprite crystal1;
+	public UI2DSprite crystal2;
+	public UI2DSprite crystal3;
+	public Sprite crystalSpriteNull;
+	public Sprite crystalSprite1;
+	public Sprite crystalSprite2;
+	public Sprite crystalSprite3;
+
 	/*public MyButton background;
 	public MyButton close;
 	public MyButton replay;
@@ -23,6 +32,7 @@ public class winPanel : MonoBehaviour {
 	public UI2DSprite fun;*/
 	// Use this for initialization
 	void Start () {
+		setCrystal ();
 		closeButton.signalOnClick.AddListener (this.openMenu);
 		closeBackground.signalOnClick.AddListener (this.openMenu);
 		menuButton.signalOnClick.AddListener (this.openMenu);
@@ -34,15 +44,26 @@ public class winPanel : MonoBehaviour {
 		if(soundManager.Instance.isSoundOn()) winAudioSource.Play();
 	}
 
+	public void setCrystal(){
+		if (crystalPanel.crystals.firstWin == true) {
+					crystal1.sprite2D = crystalSprite1;
+				}
+			if (crystalPanel.crystals.secondWin == true) {
+					crystal2.sprite2D = crystalSprite2;
+				}
+			if (crystalPanel.crystals.thirdWin == true) {
+					crystal3.sprite2D = crystalSprite3;
+				}
+	
+		}
 
 		/*background.signalOnClick.AddListener(this.onClosePlay);
 		close.signalOnClick.AddListener(this.onClosePlay);
 		replay.signalOnClick.AddListener(this.onReplayPlay);
 		next.signalOnClick.AddListener(this.onClosePlay);
 		setsFilds();*/
-	
-	/*
-	private void setsFilds()
+
+	/*private void setsFilds()
 	{
 		UI2DSprite[] crystals = fun.transform.GetComponentsInChildren<UI2DSprite>();
 
