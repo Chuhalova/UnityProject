@@ -27,10 +27,13 @@ public class HeroRabbit : MonoBehaviour {
 	Transform heroParent = null;
 	public static HeroRabbit lastRabbit = null;
 
+
+
 	void Start () {
 		myBody = this.GetComponent<Rigidbody2D>();
 		LevelInfo.current.setStartPosition (transform.position);
 		this.heroParent = this.transform.parent;
+
 
 		//music
 

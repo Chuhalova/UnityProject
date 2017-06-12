@@ -10,6 +10,9 @@ public class losePanel : MonoBehaviour {
 	public MyButton menuButton;
 	public MyButton repeatButton;
 
+	//for music 
+	public AudioClip loseAudioClip = null;
+	AudioSource loseAudioSource = null;
 	/*
 	public MyButton background;
 	public MyButton close;
@@ -25,8 +28,12 @@ public class losePanel : MonoBehaviour {
 		closeBackground.signalOnClick.AddListener(this.openMenu);
 		menuButton.signalOnClick.AddListener(this.openMenu);
 		repeatButton.signalOnClick.AddListener(this.repeat);
-		/*
-		background.signalOnClick.AddListener(this.onClosePlay);
+
+		//for music 
+		this.loseAudioSource = gameObject.AddComponent<AudioSource>();
+		this.loseAudioSource.clip = loseAudioClip;
+		if(soundManager.Instance.isSoundOn()) loseAudioSource.Play();
+		/*background.signalOnClick.AddListener(this.onClosePlay);
 		close.signalOnClick.AddListener(this.onClosePlay);
 		replay.signalOnClick.AddListener(this.onReplayPlay);
 		next.signalOnClick.AddListener(this.onClosePlay);

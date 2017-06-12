@@ -10,28 +10,37 @@ public class winPanel : MonoBehaviour {
 	public MyButton menuButton;
 	public MyButton repeatButton;
 
-	/*
-	public MyButton background;
+	//for music 
+	public AudioClip winAudioClip = null;
+	AudioSource winAudioSource = null;
+
+	/*public MyButton background;
 	public MyButton close;
 	public MyButton replay;
 	public MyButton next;
 	public UILabel coins;
 	public UILabel fruits;
-	public UI2DSprite fun;
-*/
+	public UI2DSprite fun;*/
 	// Use this for initialization
 	void Start () {
-		closeButton.signalOnClick.AddListener(this.openMenu);
-		closeBackground.signalOnClick.AddListener(this.openMenu);
-		menuButton.signalOnClick.AddListener(this.openMenu);
-		repeatButton.signalOnClick.AddListener(this.repeat);
-		/*
-		background.signalOnClick.AddListener(this.onClosePlay);
+		closeButton.signalOnClick.AddListener (this.openMenu);
+		closeBackground.signalOnClick.AddListener (this.openMenu);
+		menuButton.signalOnClick.AddListener (this.openMenu);
+		repeatButton.signalOnClick.AddListener (this.repeat);
+
+		//for music 
+		this.winAudioSource = gameObject.AddComponent<AudioSource>();
+		this.winAudioSource.clip = winAudioClip;
+		if(soundManager.Instance.isSoundOn()) winAudioSource.Play();
+	}
+
+
+		/*background.signalOnClick.AddListener(this.onClosePlay);
 		close.signalOnClick.AddListener(this.onClosePlay);
 		replay.signalOnClick.AddListener(this.onReplayPlay);
 		next.signalOnClick.AddListener(this.onClosePlay);
 		setsFilds();*/
-	}
+	
 	/*
 	private void setsFilds()
 	{

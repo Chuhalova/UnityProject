@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class LevelInfo : MonoBehaviour {
 	public static LevelInfo current;
-	int coins=0;
+	public static int coins=0;
 	int lifesNumber = 3;
 	int fruits = 0;
 	int CrystalColor = -1;
@@ -13,6 +13,8 @@ public class LevelInfo : MonoBehaviour {
 	void Awake()
 	{
 		current = this;
+		//for saving coins 
+		coins = PlayerPrefs.GetInt("coins", 0);
 	}
 
 	Vector3 startingPosition;
