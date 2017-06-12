@@ -9,6 +9,7 @@ public class LevelInfo : MonoBehaviour {
 	int lifesNumber = 3;
 	int fruits = 0;
 	int CrystalColor = -1;
+	public GameObject losePrefab;
 	void Awake()
 	{
 		current = this;
@@ -50,7 +51,8 @@ public class LevelInfo : MonoBehaviour {
 	void decreaseLifeNumber() {
 		if (lifesNumber <= 0) {
 			//lifesNumber = 3; //оновлюемо життя
-			SceneManager.LoadScene("ChooseLevel");
+			GameObject parent = UICamera.first.transform.parent.gameObject;
+			GameObject obj = NGUITools.AddChild(parent, losePrefab);
 		} else {
 			lifesNumber--;
 		}
