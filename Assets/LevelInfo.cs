@@ -10,6 +10,10 @@ public class LevelInfo : MonoBehaviour {
 	int fruits = 0;
 	int CrystalColor = -1;
 	public GameObject losePrefab;
+
+	//for fruits 
+	public int fruitsNumber = 0;
+
 	void Awake()
 	{
 		current = this;
@@ -46,6 +50,7 @@ public class LevelInfo : MonoBehaviour {
 	}
 	public void addFruits(int number)
 	{
+		fruitsNumber++;
 		fruits += number;
 		uiFruitsCounter.fruitsCounter.setFruits(fruits);
 
@@ -73,5 +78,7 @@ public class LevelInfo : MonoBehaviour {
 	public int getCurCrystalColor() {
 		return CrystalColor;
 	}
-
+	public int getFruits(){
+		return fruitsNumber;	
+	}
 }
