@@ -25,6 +25,10 @@ public class winPanel : MonoBehaviour {
 
 	//for fruits
 	public UILabel fruits;
+
+	//for coins
+	public UILabel coins;
+
 	/*public MyButton background;
 	public MyButton close;
 	public MyButton replay;
@@ -36,6 +40,7 @@ public class winPanel : MonoBehaviour {
 	void Start () {
 		setCrystal ();
 		setFruits (fruits);
+		setCoins (coins);
 		closeButton.signalOnClick.AddListener (this.openMenu);
 		closeBackground.signalOnClick.AddListener (this.openMenu);
 		menuButton.signalOnClick.AddListener (this.openMenu);
@@ -62,7 +67,9 @@ public class winPanel : MonoBehaviour {
 	public void setFruits(UILabel fruits){
 		this.fruits.text = LevelInfo.current.getFruits().ToString();
 		}
-	
+	public void setCoins(UILabel coins){
+		this.coins.text = LevelInfo.current.getCoins().ToString();
+	}
 		/*background.signalOnClick.AddListener(this.onClosePlay);
 		close.signalOnClick.AddListener(this.onClosePlay);
 		replay.signalOnClick.AddListener(this.onReplayPlay);

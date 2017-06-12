@@ -14,6 +14,9 @@ public class LevelInfo : MonoBehaviour {
 	//for fruits 
 	public int fruitsNumber = 0;
 
+	//for coins
+	public int coinsNumber = 0;
+
 	void Awake()
 	{
 		current = this;
@@ -35,6 +38,7 @@ public class LevelInfo : MonoBehaviour {
 	}
 	public void addCoins(int number)
 	{
+		coinsNumber++;
 		coins += number;
 		uiCoinsCounter.coinsCounter.setCoins(coins);
 
@@ -80,5 +84,8 @@ public class LevelInfo : MonoBehaviour {
 	}
 	public int getFruits(){
 		return fruitsNumber;	
+	}
+	public int getCoins(){
+		return coinsNumber;	
 	}
 }
