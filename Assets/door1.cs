@@ -5,11 +5,10 @@ using UnityEngine.SceneManagement;
 public class door1 : MonoBehaviour
 {
 
-
 	void OnCollisionEnter2D(Collision2D col){
 		Collider2D collider = col.collider;
 		if(col.transform.tag == "Player"){
 			SceneManager.LoadScene ("Level");
+		}
 	}
-}
 }

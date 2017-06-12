@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class winPanel : MonoBehaviour {
+public class secondWinPanel : MonoBehaviour {
 	public MyButton closeButton;
 	public MyButton closeBackground;
 	public MyButton menuButton;
@@ -54,23 +54,23 @@ public class winPanel : MonoBehaviour {
 
 	public void setCrystal(){
 		if (crystalPanel.crystals.firstWin == true) {
-					crystal1.sprite2D = crystalSprite1;
-				}
-			if (crystalPanel.crystals.secondWin == true) {
-					crystal2.sprite2D = crystalSprite2;
-				}
-			if (crystalPanel.crystals.thirdWin == true) {
-					crystal3.sprite2D = crystalSprite3;
-				}
-	
+			crystal1.sprite2D = crystalSprite1;
 		}
+		if (crystalPanel.crystals.secondWin == true) {
+			crystal2.sprite2D = crystalSprite2;
+		}
+		if (crystalPanel.crystals.thirdWin == true) {
+			crystal3.sprite2D = crystalSprite3;
+		}
+
+	}
 	public void setFruits(UILabel fruits){
 		this.fruits.text = LevelInfo.current.getFruits().ToString();
-		}
+	}
 	public void setCoins(UILabel coins){
 		this.coins.text = LevelInfo.current.getCoins().ToString();
 	}
-		/*background.signalOnClick.AddListener(this.onClosePlay);
+	/*background.signalOnClick.AddListener(this.onClosePlay);
 		close.signalOnClick.AddListener(this.onClosePlay);
 		replay.signalOnClick.AddListener(this.onReplayPlay);
 		next.signalOnClick.AddListener(this.onClosePlay);
@@ -99,12 +99,12 @@ public class winPanel : MonoBehaviour {
 	{
 		SceneManager.LoadScene("ChooseLevel");
 	}
-*/
+	*/
 	void openMenu(){
 		SceneManager.LoadScene ("ChooseLevel");
 	}
 	void openNextLevel(){ 
-		SceneManager.LoadScene ("Level2");
+		SceneManager.LoadScene ("ChooseLevel");
 	}
 
 	void repeat()

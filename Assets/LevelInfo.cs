@@ -17,6 +17,7 @@ public class LevelInfo : MonoBehaviour {
 	//for coins
 	public int coinsNumber = 0;
 
+
 	void Awake()
 	{
 		current = this;
@@ -88,4 +89,5 @@ public class LevelInfo : MonoBehaviour {
 	public int getCoins(){
 		return coinsNumber;	
 	}
+
 }
