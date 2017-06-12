@@ -43,7 +43,7 @@ public class winPanel : MonoBehaviour {
 		setCoins (coins);
 		closeButton.signalOnClick.AddListener (this.openMenu);
 		closeBackground.signalOnClick.AddListener (this.openMenu);
-		menuButton.signalOnClick.AddListener (this.openNextLevel);
+		menuButton.signalOnClick.AddListener (this.openMenu);
 		repeatButton.signalOnClick.AddListener (this.repeat);
 
 		//for music 
@@ -102,9 +102,6 @@ public class winPanel : MonoBehaviour {
 */
 	void openMenu(){
 		SceneManager.LoadScene ("ChooseLevel");
-	}
-	void openNextLevel(){ 
-		SceneManager.LoadScene ("Level2");
 	}
 
 	void repeat()
