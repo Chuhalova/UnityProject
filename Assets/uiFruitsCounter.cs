@@ -23,10 +23,10 @@ public class uiFruitsCounter : MonoBehaviour {
 		string fruitsNum = fruits.ToString();
 		string forPast = "0";
 		forPast += fruitsNum;
-		forPast+="/07";
+		forPast+="/20";
 		label.text = forPast;
 	}
 	public void removeFruits(){
-		label.text="00/07";
+		label.text="00/20";
 	}
 }
